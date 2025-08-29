@@ -21,11 +21,7 @@ on:
         type: string
 
 env:
-<<<<<<< HEAD
   SUBGRAPH_ROOT: subgraphs
-=======
-  SUBGRAPH_ROOT: ./subgraphs
->>>>>>> 3ac90bc (exit on error)
   DEPLOY_SCRIPT: ./scripts/deployGraph.sh
 
 jobs:
