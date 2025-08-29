@@ -21,7 +21,11 @@ on:
         type: string
 
 env:
+<<<<<<< HEAD
   SUBGRAPH_ROOT: subgraphs
+=======
+  SUBGRAPH_ROOT: ./subgraphs
+>>>>>>> 3ac90bc (exit on error)
   DEPLOY_SCRIPT: ./scripts/deployGraph.sh
 
 jobs:
@@ -32,7 +36,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+      - name: Install
+        run: pnpm install
       - name: Run deploy script
         run: |
           $DEPLOY_SCRIPT -n "${{ inputs.network }}" -d "${{ inputs.automation_subgraph }}"
@@ -56,7 +66,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
+      - name: Install node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+      - name: Install
+        run: pnpm install
       - name: Run deploy script
         run: |
           $DEPLOY_SCRIPT -n "${{ matrix.network }}" -d "${{ inputs.automation_subgraph }}"
