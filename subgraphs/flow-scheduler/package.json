@@ -1,6 +1,6 @@
 {
   "name": "flow-scheduler-subgraph",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A subgraph for the flow scheduler contracts",
   "keywords": [
     "subgraph"
