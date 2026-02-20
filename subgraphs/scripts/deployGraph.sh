@@ -41,7 +41,7 @@ done
 
 # Validate inputs
 if [[ -z "$NETWORK" || -z "$DEPLOY_DIR" ]]; then
-  echo "❌ Missing required argument(s)."
+  echo "Missing required argument(s)."
   print_usage_and_exit
 fi
 
@@ -53,7 +53,7 @@ fi
 
 # Validate directory
 if [[ ! -d "$DEPLOY_DIR" ]]; then
-  echo "❌ Directory not found: $DEPLOY_DIR"
+  echo "Directory not found: $DEPLOY_DIR"
   exit 1
 fi
 
@@ -61,11 +61,11 @@ fi
 if [[ -f "$DEPLOY_DIR/package.json" ]]; then
   VERSION_LABEL=$(jq -r .version "$DEPLOY_DIR/package.json")
   if [[ -z "$VERSION_LABEL" || "$VERSION_LABEL" == "null" ]]; then
-    echo "❌ Version not found in $DEPLOY_DIR/package.json"
+    echo "Version not found in $DEPLOY_DIR/package.json"
     exit 1
   fi
 else
-  echo "❌ package.json not found in $DEPLOY_DIR"
+  echo "package.json not found in $DEPLOY_DIR"
   exit 1
 fi
 
@@ -84,13 +84,13 @@ echo "🏷  Version Label:    $VERSION_LABEL"
 cd "$DEPLOY_DIR"
 
 # Step 1: Install dependencies
-pnpm install || { echo "❌ Dependency installation failed"; exit 1; }
+pnpm install || { echo "Dependency installation failed"; exit 1; }
 
 # Step 2: Generate YAML
-pnpm gen:yaml || { echo "❌ Subgraph YAML generation failed"; exit 1; }
+pnpm gen:yaml || { echo "Subgraph YAML generation failed"; exit 1; }
 
 # Step 3: Generate types
-pnpm gen:types || { echo "❌ Subgraph Types generation failed"; exit 1; }
+pnpm gen:types || { echo "Subgraph Types generation failed"; exit 1; }
 
 # Step 4: Rename subgraph YAML using original network name
 mv "$NETWORK.subgraph.yaml" subgraph.yaml
@@ -100,7 +100,7 @@ $GRAPH_CLI deploy --studio "$DEPLOY_TARGET" \
   --deploy-key "$DEPLOY_KEY" \
   --version-label "$VERSION_LABEL"
 
-echo "✅ Deployment complete: $DEPLOY_TARGET@$VERSION_LABEL"
+echo "Deployment complete: $DEPLOY_TARGET@$VERSION_LABEL"
 
 rm subgraph.yaml
 
